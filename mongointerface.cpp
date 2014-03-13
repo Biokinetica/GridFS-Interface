@@ -37,7 +37,7 @@ public:
 
     //conn.auth(BSON("mechanism" << "$external" << "userSource" << "projects1" << "pwd" << "panthermodern" << "user" << "DixieFlatline"));
 
-    ok = conn.auth(dbName.c_str(),"DixieFlatline","panthermodern",err);
+    ok = conn.auth(dbName.c_str(),"Username","Password",err);
     if ( ! ok )
         cout << "DIDN'T WORK" << endl;
     MONGO_verify( ok );

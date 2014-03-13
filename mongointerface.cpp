@@ -23,8 +23,6 @@ public:
 
     conn.connect(server, err);
 
-    //conn.auth(BSON("mechanism" << "$external" << "userSource" << "projects1" << "pwd" << "panthermodern" << "user" << "DixieFlatline"));
-
     ok = conn.auth(dbName.c_str(),"Username","Password",err);
     if ( ! ok )
         cout << "DIDN'T WORK" << endl;

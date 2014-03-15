@@ -1,2 +1,5 @@
-*~
-*.layout
+*
+!.gitignore
+!*.cpp
+!*.h
+!README.md

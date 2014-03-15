@@ -5,7 +5,6 @@
 #include "md5.h"
 #include "hex.h"
 #include <boost/filesystem.hpp>
-#include <boost/regex.hpp>
 #include <mongo/util/progress_meter.h>
 #include <mongo/client/dbclient.h>
 #include <mongo/client/gridfs.h>
@@ -23,8 +22,6 @@ public:
 
     conn.connect(server, err);
 
-    //conn.auth(BSON("mechanism" << "$external" << "userSource" << "projects1" << "pwd" << "panthermodern" << "user" << "DixieFlatline"));
-
     ok = conn.auth(dbName.c_str(),"Username","Password",err);
     if ( ! ok )
         cout << "DIDN'T WORK" << endl;
@@ -38,7 +35,6 @@ public:
         return 1;
         }
     bson::bo logoutResult() {return obj;}
-
     protected:
         string err, dbName;
         bson::bo obj;

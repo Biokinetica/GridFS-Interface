@@ -37,12 +37,7 @@
 			<Add option="-std=c++11" />
 			<Add directory="/usr/include/cryptopp" />
 		</Compiler>
-		<Linker>
-			<Add option="-lcryptopp" />
-			<Add option="-lboost_filesystem" />
-			<Add option="-lboost_thread" />
-			<Add option="-lmongoclient" />
-		</Linker>
+		<Unit filename="ReadWriteInterface.h" />
 		<Unit filename="mongointerface.cpp" />
 		<Extensions>
 			<code_completion />

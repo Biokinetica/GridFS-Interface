@@ -16,20 +16,9 @@ ARFLAGS = -r -s
 CFLAGS = -std=c++11
 
 # define any directories containing header files other than /usr/include
-#
 INCLUDES = -I/usr/include/cryptopp
 
-# define library paths in addition to /usr/lib
-#   if I wanted to include libraries not in /usr/lib I'd specify
-#   their path using -Lpath, something like:
-
-
-# define any libraries to link into executable:
-#   if I want to link in libraries (libx.so or libx.a) I use the -llibname 
-#   option, something like (this will link in libmylib.so and libm.so:
-#LIBS = -lcryptopp -lboost_filesystem -lboost_thread libmongoclient.a
-
-# define the C source files
+# define the C++ source files
 SRCS = $(wildcard *.cpp)
 
 # define the C object files 

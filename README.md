@@ -28,11 +28,13 @@ mongo::HostAndPort server("server","port");
     else
         target_path = argv[1];
 
+//Our regular expression will match any pdf that starts with the word "forces"
+
     const boost::regex my_filter( "(?i)forces.*\\.pdf" );
 
 list<string> all_matching_files;
 
-boost::filesystem::directory_iterator end_itr; // Default ctor yields past-the-end
+boost::filesystem::directory_iterator end_itr;
 for( boost::filesystem::directory_iterator i(target_path); i != end_itr; ++i )
 {
     // Skip if no match
@@ -40,7 +42,9 @@ for( boost::filesystem::directory_iterator i(target_path); i != end_itr; ++i )
     all_matching_files.push_back( i->path().filename().string() );
 }
 
+//All files that were added to the list will be uploaded to a collection named "Warmachine"
     put.uploadList(all_matching_files,"Warmachine");
 
+//terminate the connection
     put.logout();
 ```

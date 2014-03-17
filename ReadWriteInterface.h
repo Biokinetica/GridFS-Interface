@@ -4,6 +4,7 @@
 #include "files.h"
 #include "md5.h"
 #include "hex.h"
+#include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 #include <mongo/util/progress_meter.h>
 #include <mongo/client/dbclient.h>

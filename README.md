@@ -38,7 +38,7 @@ boost::filesystem::directory_iterator end_itr;
 for( boost::filesystem::directory_iterator i(target_path); i != end_itr; ++i )
 {
     // Skip if no match
-    if( boost::regex_match( i->path().filename().string(), my_filter ) )// File matches, store it
+    if( boost::regex_match( i->path().filename().string(), my_filter ) )
     all_matching_files.push_back( i->path().filename().string() );
 }
 

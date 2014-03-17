@@ -42,9 +42,28 @@ for( boost::filesystem::directory_iterator i(target_path); i != end_itr; ++i )
     all_matching_files.push_back( i->path().filename().string() );
 }
 
-//All files that were added to the list will be uploaded to a collection named "Warmachine"
+//All files added to the list will be uploaded to a collection named "Warmachine"
     put.uploadList(all_matching_files,"Warmachine");
 
 //terminate the connection
     put.logout();
+```
+Similarly, we can download files with just as much ease
+
+```c++
+Downloader getter;
+
+getter.connect("projects1",server);
+
+string expression;
+
+expression = ".*";
+
+expression.append("forces").append(".*.pdf");
+
+mongo::BSONObj reg = mongo::BSONObjBuilder().appendRegex("filename",expression,"i").obj();
+
+getter.getFiles("Warmachine",reg);
+
+getter.logout();
 ```

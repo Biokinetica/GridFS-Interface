@@ -11,9 +11,9 @@ Dependancies
 + boost_thread
 + cryptopp
 
-Example
-=======
-
+Examples
+========
+The following is an example of how one might upload a list of files using this interface
 ```c++
 mongo::HostAndPort server("server","port");
 

@@ -50,9 +50,6 @@ bool Uploader::uploadList(list<string> List, string collection)
 
     }
 
-    for(auto derp:hashlist)
-        cout << derp << endl;
-
     hashlist.clear();
 
     meter.reset(total,1,1);

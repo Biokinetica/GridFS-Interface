@@ -55,13 +55,13 @@ Downloader getter;
 
 getter.connect("projects1",server);
 
-string expression;
+string expr;
 
-expression = ".*";
+expr = ".*";
 
-expression.append("forces").append(".*.pdf");
+expr.append("forces").append(".*.pdf");
 
-mongo::BSONObj reg = mongo::BSONObjBuilder().appendRegex("filename",expression,"i").obj();
+mongo::BSONObj reg = mongo::BSONObjBuilder().appendRegex("filename",expr,"i").obj();
 
 getter.getFiles("Warmachine",reg);
 

@@ -5,7 +5,7 @@
 # 'make clean'  removes all .o and executable files
 #
 
-# define the C compiler to use
+# define the C++ compiler to use
 GCC = g++
 
 AR = ar
@@ -21,7 +21,7 @@ INCLUDES = -I/usr/include/cryptopp
 # define the C++ source files
 SRCS = $(wildcard *.cpp)
 
-# define the C object files 
+# define the C++ object files 
 #
 # This uses Suffix Replacement within a macro:
 #   $(name:string1=string2)
@@ -31,7 +31,7 @@ SRCS = $(wildcard *.cpp)
 #
 OBJS = $(SRCS:.cpp=.o)
 
-# define the executable file 
+# define the library file 
 MAIN = libmongointerface.a
 
 #

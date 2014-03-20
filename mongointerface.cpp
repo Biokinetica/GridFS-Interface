@@ -50,9 +50,6 @@ bool Uploader::uploadList(list<string> List, string collection)
 
     }
 
-    for(auto derp:hashlist)
-        cout << derp << endl;
-
     hashlist.clear();
 
     meter.reset(total,1,1);
@@ -62,7 +59,7 @@ bool Uploader::uploadList(list<string> List, string collection)
     for(auto it:masterList){
 
     if(boost::filesystem::exists(p)){
-        cout << "Uploading " << it.first << endl;
+
         fs.storeFile(it.first,it.first);
         meter.hit(it.second);
     }
@@ -72,7 +69,7 @@ bool Uploader::uploadList(list<string> List, string collection)
     }
 
     if(missedFiles >= 1){
-        cout << "Didn't upload " << missedFiles << " files" << endl;
+
         return 1;
     }
     meter.finished();

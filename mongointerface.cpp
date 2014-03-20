@@ -70,7 +70,7 @@ bool Uploader::uploadList(list<string> List, string collection)
 
     if(missedFiles >= 1){
 
-        return 1;
+        return 0;
     }
     meter.finished();
 
@@ -93,8 +93,6 @@ bool Uploader::upload(string filename, string collection)
              }
 
              getHash();
-
-             cout << digest << endl;
 
              hashIter = find(hashlist.begin(),hashlist.end(),digest);
 

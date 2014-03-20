@@ -51,6 +51,7 @@ class Uploader : public ReadWriteInterface
     public: Uploader(){};
             bool upload(string filename, string collection);
             bool uploadList(list<string> List, string collection);
+            unsigned int missedUploads(){return missedFiles;}
 
     private:
 

@@ -6,7 +6,7 @@ A small wrapper for uploading and downloading a file or multiple files using Gri
 Dependancies
 ============
 
-+ libmongoclient
++ libmongoclient (required for any mongodb communication)
 + boost_filesystem
 + boost_thread
 + cryptopp

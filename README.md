@@ -11,6 +11,11 @@ Dependancies
 + boost_thread
 + cryptopp
 
+Features
+========
+
+One of the most useful features in this wrapper is its ability to first compare the files listed for upload with files that are already in the database. This is achieved using cryptopp, a c++ encryption library. Whenever a file is uploaded, its md5 hash is taken and stored inside the document in the .files collection. This wrapper will first download the list of files from the database, then take the md5 hash of every file to be uploaded. It will then compare each locally computed hash against the list of hashes downloaded to decide if they need to be uploaded in the first place. No duplicate files!
+
 Examples
 ========
 The following is an example of how one might upload a list of files using this interface

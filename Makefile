@@ -12,8 +12,12 @@ AR = ar
 
 ARFLAGS = -r -s
 
+SHARED = -shared
+
+SHAREDLIB = libmongointerface.so
+
 # define any compile-time flags
-CFLAGS = -std=c++11
+CXXFLAGS = -std=c++11 -fPIC -O2
 
 # define any directories containing header files other than /usr/include
 INCLUDES = -I/usr/include/cryptopp
@@ -47,13 +51,15 @@ all:	$(MAIN)
 
 $(MAIN):	 $(OBJS) 
 	$(AR) $(ARFLAGS) $(MAIN) $(OBJS)
+shared:		$(OBJS)
+	$(GCC) $(SHARED) -o $(SHAREDLIB) $(OBJS)
 
-# this is a suffix replacement rule for building .o's from .c's
+# this is a suffix replacement rule for building .o's from .cpp's
 # it uses automatic variables $<: the name of the prerequisite of
-# the rule(a .c file) and $@: the name of the target of the rule (a .o file) 
+# the rule(a .cpp file) and $@: the name of the target of the rule (a .o file) 
 # (see the gnu make manual section about automatic variables)
 .cpp.o:
-	$(GCC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+	$(GCC) $(CXXFLAGS) $(INCLUDES) -c $<  -o $@
 
 clean:
 	$(RM) *.o *~ $(MAIN)

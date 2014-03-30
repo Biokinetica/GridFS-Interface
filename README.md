@@ -47,7 +47,7 @@ for( boost::filesystem::directory_iterator i(target_path); i != end_itr; ++i )
 {
     // Skip if no match
     if( boost::regex_match( i->path().filename().string(), my_filter ) )
-    all_matching_files.push_back( i->path().filename().string() );
+    all_matching_files.push_back( i->path().string() );
 }
 
 //All files added to the list will be uploaded to a collection named "Warmachine"

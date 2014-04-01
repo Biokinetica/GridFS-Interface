@@ -62,7 +62,7 @@ shared:		$(OBJS)
 	$(GCC) $(CXXFLAGS) $(INCLUDES) -c $<  -o $@
 
 clean:
-	$(RM) *.o *~ $(MAIN)
+	$(RM) *.o *~ $(MAIN) $(SHAREDLIB)
 
 depend: $(SRCS)
 	makedepend $(INCLUDES) $^

@@ -58,6 +58,8 @@ bool Uploader::uploadList(list<string> List, string collection)
 
     for(auto it:masterList){
 
+    p = it.first;
+
     if(boost::filesystem::exists(p)){
 
         fs.storeFile(it.first,it.first);

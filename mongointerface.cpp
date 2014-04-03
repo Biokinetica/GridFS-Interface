@@ -56,25 +56,41 @@ bool Uploader::uploadList(list<string> List, string collection)
 
     masterList.sort(low_to_high);
 
+    if(!masterList.empty())
     for(auto it:masterList){
 
     p = it.first;
 
     if(boost::filesystem::exists(p)){
 
-        fs.storeFile(it.first,it.first);
+        fs.storeFile(p.filename().string(),it.first);
         meter.hit(it.second);
     }
         else
+        {
+        missedList.push_back(it);
             ++missedFiles;
+            }
 
+    }
+    else
+    {
+    cout << "All matching files are already in database." << endl;
+    return true;
     }
 
     if(missedFiles >= 1){
 
+    cout << "Some files were not uploaded:" << endl;
+
+    for(auto it:missedList)
+    cout << it.first +':' << " " << it.second << "bytes" << endl;
+
         return 0;
     }
     meter.finished();
+
+    masterList.clear();
 
     total = 0;
 

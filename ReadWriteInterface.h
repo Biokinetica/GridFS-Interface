@@ -59,7 +59,7 @@ class Uploader : public ReadWriteInterface
 
         boost::filesystem::path p;
         unsigned int missedFiles;
-        list<pair<string,int>> masterList;
+        list<pair<string,int>> masterList, missedList;
         list<string> hashlist;
         list<string>::iterator hashIter;
         CryptoPP::MD5 MD5hash;

@@ -23,9 +23,11 @@ public:
 
     conn.connect(server, err);
 
-    ok = conn.auth(dbName.c_str(),"Username","Password",err);
-    if ( ! ok )
+    ok = conn.auth(dbName.c_str(),"DixieFlatline","panthermodern",err);
+    if ( ! ok ){
         cout << "DIDN'T WORK" << endl;
+        return false;
+    }
     MONGO_verify( ok );
 
     return 1;

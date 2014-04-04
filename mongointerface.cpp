@@ -196,7 +196,7 @@ list<mongo::GridFile> Downloader::getFileList(string collection, mongo::BSONObj 
             return filelist;
         }
 
-bool Deleter::remove(mongo::BSONObj query)
+bool Deleter::remove(mongo::BSONObj query, string collection)
 {
     mongo::GridFS fs = mongo::GridFS(conn,dbName,collection);
     fs.removeFile(fs.findFile(query).getFilename());

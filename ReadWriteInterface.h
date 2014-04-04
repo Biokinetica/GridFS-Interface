@@ -91,3 +91,10 @@ class Downloader : public ReadWriteInterface {
     }
 
 };
+
+class Deleter : public ReadWriteInterface{
+	public: Deleter(){};
+
+		bool remove(mongo::BSONObj query);
+		bool remove(string filename, string collection){mongo::GridFS(conn,dbName,collection).removeFile(filename);}
+}

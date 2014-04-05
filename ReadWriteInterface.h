@@ -96,5 +96,5 @@ class Deleter : public ReadWriteInterface{
 	public: Deleter(){};
 
 		bool remove(mongo::BSONObj query, string collection);
-		bool remove(string filename, string collection){mongo::GridFS(conn,dbName,collection).removeFile(filename);}
+		bool remove(string filename, string collection){mongo::GridFS(conn,dbName,collection).removeFile(filename); return true;}
 };

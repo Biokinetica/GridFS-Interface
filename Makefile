@@ -30,7 +30,7 @@ SRCS = $(wildcard *.cpp)
 # This uses Suffix Replacement within a macro:
 #   $(name:string1=string2)
 #         For each word in 'name' replace 'string1' with 'string2'
-# Below we are replacing the suffix .c of all words in the macro SRCS
+# Below we are replacing the suffix .cpp of all words in the macro SRCS
 # with the .o suffix
 #
 OBJS = $(SRCS:.cpp=.o)

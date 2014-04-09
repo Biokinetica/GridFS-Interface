@@ -44,8 +44,10 @@ bool Uploader::uploadList(list<string> List, string collection)
             masterList.push_back(make_pair(*it,counter.tellg()));
             total += counter.tellg();
              }
-             else
-                ++missedFiles;
+             else{
+        missedList.push_back(*it);
+            ++missedFiles;
+            }
         }
 
     }
@@ -63,12 +65,12 @@ bool Uploader::uploadList(list<string> List, string collection)
 
     if(boost::filesystem::exists(p)){
 
-        fs.storeFile(p.filename().string(),it.first);
+        fs.storeFile(it.first,p.filename().string());
         meter.hit(it.second);
     }
         else
         {
-        missedList.push_back(it);
+        missedList.push_back(*it);
             ++missedFiles;
             }
 
@@ -84,7 +86,7 @@ bool Uploader::uploadList(list<string> List, string collection)
     cout << "Some files were not uploaded:" << endl;
 
     for(auto it:missedList)
-    cout << it.first +':' << " " << it.second << "bytes" << endl;
+    cout << it.first << ": " << it.second << "bytes" << endl;
 
         return 0;
     }

@@ -23,7 +23,7 @@ public:
 
     conn.connect(server, err);
 
-    ok = conn.auth(dbName.c_str(),"DixieFlatline","panthermodern",err);
+    ok = conn.auth(dbName.c_str(),"Username","password",err);
     if ( ! ok ){
         cout << "DIDN'T WORK" << endl;
         return false;

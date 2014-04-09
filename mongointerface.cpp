@@ -31,6 +31,8 @@ bool Uploader::uploadList(list<string> List, string collection)
     for(list<string>::iterator it = List.begin(); it != List.end(); ++it)
     {
         p = *it;
+        ifstream counter(*it);
+        counter.seekg(0,ios::end);
 
         if(boost::filesystem::exists(p))
         {
@@ -38,14 +40,14 @@ bool Uploader::uploadList(list<string> List, string collection)
 
              hashIter = find(hashlist.begin(),hashlist.end(),digest);
 
+
         if(hashIter == hashlist.end()){
-            ifstream counter(*it);
-            counter.seekg(0,ios::end);
+
             masterList.push_back(make_pair(*it,counter.tellg()));
             total += counter.tellg();
              }
              else{
-        missedList.push_back(*it);
+            missedList.push_back(make_pair(*it,counter.tellg()));
             ++missedFiles;
             }
         }
@@ -70,7 +72,9 @@ bool Uploader::uploadList(list<string> List, string collection)
     }
         else
         {
-        missedList.push_back(*it);
+            ifstream counter(it.first);
+            counter.seekg(0,ios::end);
+        missedList.push_back(it);
             ++missedFiles;
             }
 
@@ -78,6 +82,11 @@ bool Uploader::uploadList(list<string> List, string collection)
     else
     {
     cout << "All matching files are already in database." << endl;
+    cout << "Some files were not uploaded:" << endl;
+
+    for(auto it:missedList)
+    cout << it.first << ": " << it.second << "bytes" << endl;
+
     return true;
     }
 

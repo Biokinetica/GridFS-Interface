@@ -214,7 +214,7 @@ bool Deleter::remove(mongo::BSONObj query, string collection)
     return true;
 }
 
-bool mongo::ProgressMeter::hit(int n){
+/*bool mongo::ProgressMeter::hit(int n){
            if ( ! _active ) {
                cout << "warning: hit on in-active ProgressMeter" << endl;
                 return false;
@@ -248,4 +248,4 @@ void mongo::ProgressMeter::reset( unsigned long long total , int secondsBetween,
            _lastTime = (int)time(0);
 
              _active = 1;
-}
+}*/

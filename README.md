@@ -5,6 +5,7 @@ A small wrapper for uploading and downloading a file or multiple files using Gri
 
 Dependancies
 ============
+Programs using this library will require the following libraries for linking:
 
 + libmongoclient (required for any mongodb communication)
 + boost_filesystem

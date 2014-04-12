@@ -39,6 +39,7 @@
 		</Compiler>
 		<Unit filename="ReadWriteInterface.h" />
 		<Unit filename="mongointerface.cpp" />
+		<Unit filename="progress_meter.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

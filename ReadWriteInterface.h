@@ -1,3 +1,4 @@
+#define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -38,7 +39,7 @@ class ProgressMeter : boost::noncopyable {
         void finished() { _active = 0; }
         bool isActive() const { return _active; }
 
-        
+
         bool hit( int n = 1 );
 
         void setUnits( const string& units ) { _units = units; }
@@ -154,8 +155,8 @@ class Uploader : public ReadWriteInterface
         list<pair<string,int>> masterList, missedList;
         list<string> hashlist;
         list<string>::iterator hashIter;
-        CryptoPP::MD5 MD5hash;
-        byte buffer[2 * CryptoPP::MD5::DIGESTSIZE];
+        CryptoPP::Weak::MD5 MD5hash;
+        byte buffer[2 * CryptoPP::Weak::MD5::DIGESTSIZE];
         string digest;
         void getHash();
         static bool low_to_high(pair<string,int> herp, pair<string,int> derp)

@@ -5,9 +5,9 @@ void Uploader::getHash()
 {
     CryptoPP::FileSource f(p.string().c_str(), true,
              new CryptoPP::HashFilter(MD5hash,
-             new CryptoPP::HexEncoder(new CryptoPP::ArraySink(buffer,2 * CryptoPP::MD5::DIGESTSIZE))));
+             new CryptoPP::HexEncoder(new CryptoPP::ArraySink(buffer,2 * CryptoPP::Weak::MD5::DIGESTSIZE))));
 
-             digest = string((const char*)buffer,2 * CryptoPP::MD5::DIGESTSIZE);
+             digest = string((const char*)buffer,2 * CryptoPP::Weak::MD5::DIGESTSIZE);
 }
 
 bool Uploader::uploadList(list<string> List, string collection)
@@ -212,39 +212,3 @@ bool Deleter::remove(mongo::BSONObj query, string collection)
     fs.removeFile(fs.findFile(query).getFilename());
     return true;
 }
-
-/*bool mongo::ProgressMeter::hit(int n){
-           if ( ! _active ) {
-               cout << "warning: hit on in-active ProgressMeter" << endl;
-                return false;
-            }
-
-          _done += n;
-           _hits++;
-           if ( _hits % _checkInterval )
-              return false;
-
-         int t = (int) time(0);
-           if ( t - _lastTime < _secondsBetween )
-              return false;
-
-          if ( _total > 0 ) {
-            int per = (int)( ( (double)_done * 100.0 ) / (double)_total );
-
-            cout << "\t\t" << _name << ": " << _done << '/' << _total << '\t' << per << '%' << endl;
-        }
-             _lastTime = t;
-            return true;
-        }
-
-void mongo::ProgressMeter::reset( unsigned long long total , int secondsBetween, int checkInterval) {
-     _total = total;
-           _secondsBetween = secondsBetween;
-           _checkInterval = checkInterval;
-
-           _done = 0;
-           _hits = 0;
-           _lastTime = (int)time(0);
-
-             _active = 1;
-}*/

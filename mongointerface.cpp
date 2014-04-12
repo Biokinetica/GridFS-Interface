@@ -72,8 +72,7 @@ bool Uploader::uploadList(list<string> List, string collection)
     }
         else
         {
-            ifstream counter(it.first);
-            counter.seekg(0,ios::end);
+
         missedList.push_back(it);
             ++missedFiles;
             }
@@ -82,10 +81,10 @@ bool Uploader::uploadList(list<string> List, string collection)
     else
     {
     cout << "All matching files are already in database." << endl;
-    cout << "Some files were not uploaded:" << endl;
+    cout << "Files were not uploaded: " << endl;
 
     for(auto it:missedList)
-    cout << it.first << ": " << it.second << "bytes" << endl;
+    cout << it.first << ": " << it.second << " bytes" << endl;
 
     return true;
     }
@@ -95,7 +94,7 @@ bool Uploader::uploadList(list<string> List, string collection)
     cout << "Some files were not uploaded:" << endl;
 
     for(auto it:missedList)
-    cout << it.first << ": " << it.second << "bytes" << endl;
+    cout << it.first << ": " << it.second << " bytes" << endl;
 
         return 0;
     }

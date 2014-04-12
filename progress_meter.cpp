@@ -1,4 +1,4 @@
-#include "progress_meter.h"
+#include "ReadWriteInterface.h"
 
 void ProgressMeter::reset( unsigned long long total , int secondsBetween , int checkInterval) {
         _total = total;

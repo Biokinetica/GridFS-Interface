@@ -1,18 +1,110 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <boost/noncopyable.hpp>
 #include <list>
 #include "files.h"
 #include "md5.h"
 #include "hex.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
-#include <mongo/util/progress_meter.h>
 #include <mongo/client/dbclient.h>
 #include <mongo/client/gridfs.h>
 #include <mongo/bson/bsonobj.h>
 #include <mongo/client/dbclientcursor.h>
 
 using namespace std;
+
+class ProgressMeter : boost::noncopyable {
+    public:
+        ProgressMeter(unsigned long long total,
+                      int secondsBetween = 3,
+                      int checkInterval = 100,
+                      string units = "",
+                      string name = "Progress")
+                : _showTotal(true),
+                  _units(units) {
+            _name = name.c_str();
+            reset( total , secondsBetween , checkInterval );
+        }
+
+        ProgressMeter() : _active(0), _showTotal(true), _units("") {
+            _name = "Progress";
+        }
+
+        // typically you do ProgressMeterHolder
+        void reset( unsigned long long total , int secondsBetween = 3 , int checkInterval = 100 );
+
+        void finished() { _active = 0; }
+        bool isActive() const { return _active; }
+
+        
+        bool hit( int n = 1 );
+
+        void setUnits( const string& units ) { _units = units; }
+        string getUnit() const { return _units; }
+
+        void setName(string name) { _name = name.c_str(); }
+        string getName() { return _name; }
+
+        void setTotalWhileRunning( unsigned long long total ) {
+            _total = total;
+        }
+
+        unsigned long long done() const { return _done; }
+
+        unsigned long long hits() const { return _hits; }
+
+        unsigned long long total() const { return _total; }
+
+        void showTotal(bool doShow) {
+            _showTotal = doShow;
+        }
+
+        string toString();
+
+        bool operator==( const ProgressMeter& other ) const { return this == &other; }
+
+    private:
+
+        bool _active;
+
+        unsigned long long _total;
+        bool _showTotal;
+        int _secondsBetween;
+        int _checkInterval;
+
+        unsigned long long _done;
+        unsigned long long _hits;
+        int _lastTime;
+
+        string _units;
+        string _name;
+    };
+
+    class ProgressMeterHolder : boost::noncopyable {
+    public:
+        ProgressMeterHolder( ProgressMeter& pm )
+            : _pm( pm ) {
+        }
+
+        ~ProgressMeterHolder() {
+            _pm.finished();
+        }
+
+        ProgressMeter* operator->() { return &_pm; }
+
+        ProgressMeter* get() { return &_pm; }
+
+        bool hit( int n = 1 ) { return _pm.hit( n ); }
+
+        void finished() { _pm.finished(); }
+
+        bool operator==( const ProgressMeter& other ) { return _pm == other; }
+
+    private:
+        ProgressMeter& _pm;
+    };
 
 class ReadWriteInterface
 {
@@ -43,7 +135,7 @@ public:
         bson::bo obj;
         bool ok;
         mongo::DBClientConnection conn;
-        mongo::ProgressMeter meter;
+        ProgressMeter meter;
         unsigned long long total = 0;
         unique_ptr<mongo::DBClientCursor> files;
 };

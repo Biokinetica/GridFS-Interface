@@ -10,7 +10,7 @@ Programs using this library will require the following libraries for linking:
 + libmongoclient (required for any mongodb communication)
 + boost_filesystem
 + boost_thread
-+ cryptopp
++ [cryptopp](http://sourceforge.net/projects/cryptopp "CyptoPP Sourceforge mirror")
 
 Features
 ========

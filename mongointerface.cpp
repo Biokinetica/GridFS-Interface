@@ -25,7 +25,7 @@ bool Uploader::uploadList(list<string> List, string collection)
 
     while(files.get()->more()){
                     mongo::GridFile file = fs.findFile(files.get()->next());
-                    hashlist.push_front(boost::algorithm::to_upper_copy(file.getMD5()));
+                    hashlist.emplace_front(boost::algorithm::to_upper_copy(file.getMD5()));
              }
 
     for(list<string>::iterator it = List.begin(); it != List.end(); ++it)
@@ -43,11 +43,11 @@ bool Uploader::uploadList(list<string> List, string collection)
 
         if(hashIter == hashlist.end()){
 
-            masterList.push_back(make_pair(*it,counter.tellg()));
+            masterList.emplace_back(*it,counter.tellg());
             total += counter.tellg();
              }
              else{
-            missedList.push_back(make_pair(*it,counter.tellg()));
+            missedList.emplace_back(*it,counter.tellg());
             ++missedFiles;
             }
         }

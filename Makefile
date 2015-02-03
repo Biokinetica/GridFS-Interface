@@ -8,6 +8,8 @@
 # define the C++ compiler to use
 GCC = g++
 
+COPY = cp
+
 AR = ar
 
 ARFLAGS = -r -s
@@ -17,6 +19,10 @@ SHARED = -shared
 SHAREDLIB = libmongointerface.so
 
 INSTALL_PATH?=/usr/local
+
+LIB?=/lib
+
+INCLUDE?=/include
 
 # define any compile-time flags
 CXXFLAGS = -std=c++11 -fPIC -O2
@@ -55,6 +61,7 @@ $(MAIN):	 $(OBJS)
 	$(AR) $(ARFLAGS) $(MAIN) $(OBJS)
 shared:		$(OBJS)
 	$(GCC) $(SHARED) -o $(SHAREDLIB) $(OBJS)
+install:	; $(COPY) $(SHAREDLIB) $(INSTALL_PATH)$(LIB) ; $(COPY) $(wildcard *.h) $(INSTALL_PATH)$(INCLUDE)
 
 # this is a suffix replacement rule for building .o's from .cpp's
 # it uses automatic variables $<: the name of the prerequisite of

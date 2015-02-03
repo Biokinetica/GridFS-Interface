@@ -1,7 +1,7 @@
 #
 # 'make depend' uses makedepend to automatically generate dependencies 
 #               (dependencies are added to end of Makefile)
-# 'make'        build executable file 'mycc'
+# 'make'        build library
 # 'make clean'  removes all .o and executable files
 #
 
@@ -15,6 +15,8 @@ ARFLAGS = -r -s
 SHARED = -shared
 
 SHAREDLIB = libmongointerface.so
+
+INSTALL_PATH?=/usr/local
 
 # define any compile-time flags
 CXXFLAGS = -std=c++11 -fPIC -O2
